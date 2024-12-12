@@ -2,8 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    deployment.kubernetes.io/revision: "2"
-  generation: 2
+    deployment.kubernetes.io/revision: "1"
   labels:
     app: webgoat
   name: webgoat

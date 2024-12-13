@@ -6,3 +6,5 @@ resources:
 images:
 - name: docker.io/rajsomesetty/webgoat-app
   newTag: 34
+- name: rajsomesetty/webgoat-app
+  newTag: "36"

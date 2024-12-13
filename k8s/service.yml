@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cloud.google.com/neg: '{"ingress":true}'
+  labels:
+    app: webgoat
+  name: webgoat-service
+  namespace: webgoat
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http-webgoat
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  - name: admin-webgoat
+    port: 9090
+    protocol: TCP
+    targetPort: 9090
+  selector:
+    app: webgoat
+  sessionAffinity: None
+  type: ClusterIP

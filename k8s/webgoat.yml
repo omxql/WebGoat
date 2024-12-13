@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: webgoat
+  name: webgoat
+  namespace: webgoat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webgoat
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: webgoat
+    spec:
+      containers:
+      - image: docker.io/rajsomesetty/webgoat-app:34
+        imagePullPolicy: Always
+        name: webgoat-app
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 9090
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

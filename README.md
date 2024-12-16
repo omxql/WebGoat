@@ -144,7 +144,7 @@ To change the IP address add the following variable to the `WebGoat/webgoat-cont
 server.address=x.x.x.x
 ```
 
-## 4. Run with custom menu    
+## 4. Run with custom menu
 
 For specialist only. There is a way to set up WebGoat with a personalized menu. You can leave out some menu categories or individual lessons by setting certain environment variables.
 

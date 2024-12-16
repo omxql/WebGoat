@@ -5,4 +5,4 @@ resources:
 - service.yml
 images:
 - name: docker.io/rajsomesetty/webgoat-app
-  newTag: "72"
+  newTag: "73"

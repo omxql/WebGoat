@@ -1,3 +1,4 @@
+#syntax=docker/dockerfile:1.4
 # Stage 1: Build with JDK (eclipse-temurin:21-jdk-jammy)
 FROM docker.io/eclipse-temurin:21-jdk-jammy AS build
 LABEL name="WebGoat: A deliberately insecure Web Application"

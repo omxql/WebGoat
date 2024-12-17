@@ -69,7 +69,7 @@ WORKDIR /home/webgoat
 #COPY --from=build /app/spring-petclinic.jar /app/spring-petclinic.jar
 #COPY --chown=webgoat /home/webgoat/webgoat.jar /home/webgoat/webgoat.jar
 #COPY --from=build /home/webgoat/webgoat.jar /home/webgoat/webgoat.jar
-COPY --from=build --chown=webgoat target/webgoat-*.jar /home/webgoat/webgoat.jar
+COPY --from=build --chown=webgoat /home/webgoat/target/webgoat-*.jar /home/webgoat/webgoat.jar
 
 ENV TZ=Asia/Kolkata
 

@@ -16,7 +16,10 @@ COPY --chown=webgoat target/webgoat-*.jar /home/webgoat/webgoat.jar
 EXPOSE 8080
 EXPOSE 9090
 
-ENV TZ=Europe/Amsterdam
+ENV TZ=Asia/Kolkata
+
+ARG CACHEBUST=001
+RUN echo "Arg CACHEBUST effects change in the imageSha. CACHEBUST=$CACHEBUST"
 
 WORKDIR /home/webgoat
 ENTRYPOINT [ "java", \

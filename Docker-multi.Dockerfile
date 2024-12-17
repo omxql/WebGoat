@@ -30,7 +30,7 @@ USER webgoat
 
 # Create the mvn.sh script
 RUN cat > mvn.sh <<'EOF'
-USR=`id -un`
+export USR=`id -un`
 echo "Container is running as user ${USR}"
 echo "Maven cache directory is ..."
 echo -en "/root/.m2/repository"
@@ -47,7 +47,6 @@ EOF
 
 # Run the build process with Maven, using a cache mount for the maven repository
 RUN --mount=type=cache,target=/root/.m2/repository bash mvn.sh
-
 
 ## ========================================
 

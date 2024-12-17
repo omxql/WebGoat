@@ -38,7 +38,7 @@ echo -en "/root/.m2/repository"
 # ./mvnw help:evaluate -Dexpression=settings.localRepository -q -DforceStdout
 echo -e "\nStarting build process"
 #./mvnw clean package -DskipTests
-./mvnw spotless:apply && mvn -B -DskipTests clean install -e
+./mvnw spotless:apply && ./mvnw -B -DskipTests clean install -e
 echo $PWD/webgoat.jar
 rm -rf .mvn/ src/ target/ mvnw pom.xml
 ls -lr /home/webgoat/

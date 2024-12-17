@@ -6,7 +6,8 @@ LABEL maintainer="WebGoat team"
 RUN \
   useradd -ms /bin/bash webgoat && \
   chgrp -R 0 /home/webgoat && \
-  chmod -R g=u /home/webgoat
+  chmod -R g=u /home/webgoat && \
+  ls -la /home/webgoat
 
 USER webgoat
 

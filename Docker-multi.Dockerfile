@@ -13,6 +13,9 @@ USER webgoat
 
 WORKDIR /home/webgoat
 
+RUN pwd && \
+  ls -la /home/webgoat
+
 # Copy the necessary files for building the application
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./

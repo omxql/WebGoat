@@ -21,6 +21,10 @@ COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 COPY src ./src
 
+# Set correct permissions for files
+RUN chown -R webgoat:webgoat /home/webgoat && \
+    chmod -R u+rwx /home/webgoat
+
 # Create the mvn.sh script
 RUN cat > mvn.sh <<'EOF'
 USR=`id -un`

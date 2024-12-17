@@ -41,6 +41,7 @@ echo -e "\nStarting build process"
 ./mvnw spotless:apply && mvn -B -DskipTests clean install -e
 echo $PWD/webgoat.jar
 rm -rf .mvn/ src/ target/ mvnw pom.xml
+ls -lr /home/webgoat/
 echo "Build process completed successfully"
 EOF
 

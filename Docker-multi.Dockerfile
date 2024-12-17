@@ -58,7 +58,7 @@ EXPOSE 8080
 EXPOSE 9090
 
 # Command to run the application
-CMD [ "java", \
+ENTRYPOINT [ "java", \
    "-Duser.home=/root", \
    "-Dfile.encoding=UTF-8", \
    "--add-opens", "java.base/java.lang=ALL-UNNAMED", \

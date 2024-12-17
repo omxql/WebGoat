@@ -33,7 +33,7 @@ RUN cat > mvn.sh <<'EOF'
 export USR=`id -un`
 echo "Container is running as user ${USR}"
 echo "Maven cache directory is ..."
-echo -en "/root/.m2/repository"
+echo -en "/home/webgoat/.m2/repository"
 # During runtime fetches the maven cache directory
 # ./mvnw help:evaluate -Dexpression=settings.localRepository -q -DforceStdout
 echo -e "\nStarting build process"
@@ -47,7 +47,7 @@ echo "Build process completed successfully"
 EOF
 
 # Run the build process with Maven, using a cache mount for the maven repository
-RUN --mount=type=cache,target=/root/.m2/repository bash mvn.sh
+RUN --mount=type=cache,target=/home/webgoat/.m2/repository bash mvn.sh
 
 ## ========================================
 

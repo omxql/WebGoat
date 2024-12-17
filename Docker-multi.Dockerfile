@@ -69,7 +69,8 @@ WORKDIR /home/webgoat
 # Copy the built JAR from the build stage
 #COPY --from=build /app/spring-petclinic.jar /app/spring-petclinic.jar
 #COPY --chown=webgoat /home/webgoat/webgoat.jar /home/webgoat/webgoat.jar
-COPY --from=build /home/webgoat/webgoat.jar /home/webgoat/webgoat.jar
+#COPY --from=build /home/webgoat/webgoat.jar /home/webgoat/webgoat.jar
+COPY --from=build --chown=webgoat target/webgoat-*.jar /home/webgoat/webgoat.jar
 
 ENV TZ=Asia/Kolkata
 

@@ -39,7 +39,9 @@ echo -en "/root/.m2/repository"
 echo -e "\nStarting build process"
 #./mvnw clean package -DskipTests
 ./mvnw spotless:apply && ./mvnw -B -DskipTests clean install -e
+cp -v /home/webgoat/target/webgoat-*.jar /home/webgoat/webgoat.jar
 echo $PWD/webgoat.jar
+ls -lr /home/webgoat/
 rm -rf .mvn/ src/ mvnw pom.xml
 ls -lr /home/webgoat/
 echo "Build process completed successfully"
@@ -81,7 +83,7 @@ EXPOSE 8080
 EXPOSE 9090
 
 # Command to run the application
-ENTRYPOINT [ "java", \
+CMD [ "java", \
    "-Duser.home=/home/webgoat", \
    "-Dfile.encoding=UTF-8", \
    "--add-opens", "java.base/java.lang=ALL-UNNAMED", \

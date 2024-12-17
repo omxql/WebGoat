@@ -23,7 +23,7 @@ COPY src ./src
 
 # Create the mvn.sh script
 RUN cat > mvn.sh <<'EOF'
-export USR=`id -un`
+USR=`id -un`
 echo "Container is running as user ${USR}"
 echo "Maven cache directory is ..."
 echo -en "/root/.m2/repository"

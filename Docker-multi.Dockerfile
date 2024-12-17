@@ -47,6 +47,10 @@ RUN --mount=type=cache,target=/root/.m2/repository bash mvn.sh
 FROM bellsoft/liberica-openjre-alpine-musl:17 AS final
 #FROM eclipse-temurin:21-jdk-jammy AS final
 
+# Install the shadow package to provide useradd and groupadd
+RUN apk add --no-cache shadow bash
+
+# Create the webgoat user and update permissions
 RUN \
   useradd -ms /bin/bash webgoat && \
   chgrp -R 0 /home/webgoat && \

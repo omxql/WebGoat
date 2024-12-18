@@ -4,6 +4,8 @@ FROM docker.io/eclipse-temurin:21-jdk-jammy AS build
 LABEL name="WebGoat: A deliberately insecure Web Application"
 LABEL maintainer="WebGoat team"
 
+USER root
+
 WORKDIR /app
 
 # Copy the necessary files for building the application
@@ -11,10 +13,8 @@ COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 COPY src ./src
 
-USER root
-
 # Create the mvn.sh script
-RUN cat > mvn.sh <<'EOF'
+COPY <<-'EOF' mvn.sh
 export USR=`id -un`
 echo "Container is running as user ${USR}"
 echo "Maven cache directory is ..."
@@ -27,7 +27,7 @@ echo -e "\nStarting build process"
 cp -v target/webgoat-*.jar /app/webgoat.jar
 echo $PWD/webgoat.jar
 ls -lhr /app
-rm -rf .mvn/ src/ mvnw pom.xml
+rm -rf .mvn/ src/ target/ mvnw pom.xml
 echo "Build process completed successfully"
 EOF
 
@@ -49,7 +49,8 @@ USER webgoat
 WORKDIR /app
 
 # Copy the built JAR from the build stage
-COPY --chown=webgoat:webgoat --from=build /app/target/webgoat-*.jar /app/webgoat.jar
+#COPY --chown=webgoat:webgoat --from=build /app/target/webgoat-*.jar /app/webgoat.jar
+COPY --chown=webgoat:webgoat --from=build /app/webgoat.jar /app/webgoat.jar
 
 ARG CACHEBUST=001
 RUN echo "Arg CACHEBUST effects change in the imageSha. CACHEBUST=$CACHEBUST"

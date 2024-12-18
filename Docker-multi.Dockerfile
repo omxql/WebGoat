@@ -40,15 +40,16 @@ RUN --mount=type=cache,target=/root/.m2/repository bash mvn.sh
 FROM bellsoft/liberica-openjre-alpine-musl:17 AS final
 #FROM eclipse-temurin:21-jdk-jammy AS final
 
-# Install the shadow package to provide useradd and groupadd
-RUN apk add --no-cache shadow bash
+ENV TZ=Asia/Kolkata
+
+RUN id -u webgoat 2>/dev/null || adduser -D webgoat
+
+USER webgoat
 
 WORKDIR /app
 
 # Copy the built JAR from the build stage
-COPY --from=build /app/target/webgoat-*.jar /app/webgoat.jar
-
-ENV TZ=Asia/Kolkata
+COPY --chown=webgoat:webgoat --from=build /app/target/webgoat-*.jar /app/webgoat.jar
 
 ARG CACHEBUST=001
 RUN echo "Arg CACHEBUST effects change in the imageSha. CACHEBUST=$CACHEBUST"
@@ -58,8 +59,8 @@ EXPOSE 8080
 EXPOSE 9090
 
 # Command to run the application
-ENTRYPOINT [ "java", \
-   "-Duser.home=/root", \
+CMD [ "java", \
+   "-Duser.home=/home/webgoat", \
    "-Dfile.encoding=UTF-8", \
    "--add-opens", "java.base/java.lang=ALL-UNNAMED", \
    "--add-opens", "java.base/java.util=ALL-UNNAMED", \
